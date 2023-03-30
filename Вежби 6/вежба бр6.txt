@@ -1,0 +1,91 @@
+
+//NP Natalija Talevska 1020
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define CARDS 52
+#define FACES 13
+
+// card structure definition
+struct card {
+   const char *face; // define pointer face
+   const char *suit; // define pointer suit
+}; // end struct card
+
+typedef struct card Card; // new type name for struct card
+
+// prototypes
+void fillDeck( Card * const wDeck, const char * wFace[],
+   const char * wSuit[] );
+void shuffle( Card * const wDeck );
+void deal( const Card * const wDeck );
+
+int main( void )
+{
+   Card deck[ CARDS ]; // define array of Cards
+
+   // sto se pravi vo ovoj red ? 
+   //kreira niza od 13 nizi od znaci (stringovi), kade sekoj niz od znaci pretstavuva ime na lice na igralna karta, od „Ace“ do „King“.
+   //Deklaracijata const char * go ozna?uva toa deka sekoj element vo nizata e pokazatel konstanten string od znaci.
+   const char *face[] = { "Ace", "Deuce", "Three", "Four", "Five",
+      "Six", "Seven", "Eight", "Nine", "Ten",
+      "Jack", "Queen", "King"};
+
+   // sto se pravi vo ovoj red ?
+   //Ovoj red kod definira niza od 4 iminja na boi na karti, koi se ?uvaat kako stringovi.
+   const char *suit[] = { "Hearts", "Diamonds", "Clubs", "Spades"};
+
+   srand( time( NULL ) ); // sto e ovaa naredba ? 
+   //za da inicijalizira generator na slu?ai na broevi, srand() koristi vrednost na time(NULL) kako seed za da se generira razli?ni nizi na slu?ai vo sekoe izvršuvanje na programata. 
+   //Ovaa tehnika e ?esto koristena vo igri za generiranje na slu?ai na elementi, kako što se dobiva na slu?aen broj ili izbor na slu?ajna karta od špil. 
+   
+   fillDeck( deck, face, suit ); 
+   shuffle( deck ); 
+   deal( deck ); 
+} // end main
+
+// place strings into Card structures
+void fillDeck( Card * const wDeck, const char * wFace[],
+   const char * wSuit[] )
+{
+   size_t i; 
+
+   // loop through wDeck
+   for ( i = 0; i < CARDS; ++i ) {
+      wDeck[ i ].face = wFace[ i % FACES ];
+      wDeck[ i ].suit = wSuit[ i / FACES ];
+   } // end for
+} // end function fillDeck
+
+// shuffle cards
+void shuffle( Card * const wDeck )
+{
+   size_t i; // sto e ovaa promenliva ? 
+   //size_t e tip na podatoci za ?uvanje na golemini na nizi i kolekcii.
+   //size_t i; e deklaracija na nova promenliva od tipot size_t, koja može da koristi kako broj za iteracija niz nizi ili kolekcii na podatoci.
+   //toa e obicno napraveno za da se garantira deka goleminite na nizite se cuvaat kako pozitivni celobrojni vrednosti
+   size_t j; // sto e ovaa promenliva i vo koi vrednosti se dvizi ? vidi kod - 
+             //size_t j e deklaracija na nova promenliva j od tipot size_t. j e voobi?aena koristena kako broja? za iteracija nizi ili kolekcii na podatoci, na ist na?in kako što se koristi 'i'
+   Card temp; // define temporary structure for swapping Cards
+
+   // loop thr
+   for ( i = 0; i < CARDS; ++i ) {
+      j = rand() % CARDS; // 
+      temp = wDeck[ i ];
+      wDeck[ i ] = wDeck[ j ];
+      wDeck[ j ] = temp;
+   } // end for
+} // end function shuffle
+
+// deal cards
+void deal( const Card * const wDeck )
+{
+   size_t i; // counter
+
+   // loop through wDeck
+   for ( i = 0; i < CARDS; ++i ) {
+      printf( "%5s of %-8s%s", wDeck[ i ].face, wDeck[ i ].suit,
+  ( i + 1 ) % 4 ? "  " : "\n" );
+   } // end for
+} // end function deal
