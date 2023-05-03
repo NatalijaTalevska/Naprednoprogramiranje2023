@@ -1,0 +1,72 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <string>
+using namespace std;
+
+const int DECK_SIZE = 54;
+const int SUIT_SIZE = 13;
+const int NUM_PEOPLE = 4;
+
+string suits[4] = {"Hearts", "Diamonds", "Clubs", "Spades"};
+string ranks[SUIT_SIZE] = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
+string joker = "Joker";
+
+void shuffleDeck(string deck[], int size) {
+    for (int i = 0; i < size; i++) {
+        int j = rand() % size;
+        string temp = deck[i];
+        deck[i] = deck[j];
+        deck[j] = temp;
+    }
+}
+
+int main() {
+    string deck[DECK_SIZE];
+    int index = 0;
+
+    string person[NUM_PEOPLE][SUIT_SIZE];
+
+    int numCardsDealt = 0;
+
+    for (int i = 0; i < SUIT_SIZE; i++) {
+        for (int j = 0; j < 4; j++) {
+            deck[index] = ranks[i] + " of " + suits[j];
+            index++;
+        }
+    }
+
+    deck[52] = joker;
+    deck[53] = joker;
+
+ srand(time(NULL));
+
+    cout << "Unshuffled Deck:" << endl;
+    for (int i = 0; i < DECK_SIZE; i++) {
+        cout << deck[i] << endl;
+    }
+
+    shuffleDeck(deck, DECK_SIZE);
+
+    cout << "\nShuffled Deck:" << endl;
+    for (int i = 0; i < DECK_SIZE; i++) {
+        cout << deck[i] << endl;
+    }
+
+    for (int i = 0; i < NUM_PEOPLE; i++) {
+        for (int j = 0; j < SUIT_SIZE; j++) {
+            person[i][j] = deck[numCardsDealt];
+            numCardsDealt++;
+        }
+    }
+
+    for (int i = 0; i < NUM_PEOPLE; i++) {
+        cout << "\nPerson " << i+1 << ":" << endl;
+        for (int j = 0; j < SUIT_SIZE; j++) {
+            cout << person[i][j] << endl;
+        }
+        cout << endl;
+    }
+    return 0;
+
+}
