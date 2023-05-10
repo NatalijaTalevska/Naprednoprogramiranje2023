@@ -1,0 +1,75 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+void print_board(const vector<char>& board)
+{
+    cout << "  " << board[0] << " | " << board[1] << " | " << board[2] << endl;
+    cout << "-----------" << endl;
+    cout << "  " << board[3] << " | " << board[4] << " | " << board[5] << endl;
+    cout << "-----------" << endl;
+    cout << "  " << board[6] << " | " << board[7] << " | " << board[8] << endl;
+}
+
+bool is_winner(const vector<char>& board, char player)
+{
+    if ((board[0] == player && board[1] == player && board[2] == player) ||
+        (board[3] == player && board[4] == player && board[5] == player) ||
+        (board[6] == player && board[7] == player && board[8] == player) ||
+        (board[0] == player && board[3] == player && board[6] == player) ||
+        (board[1] == player && board[4] == player && board[7] == player) ||
+        (board[2] == player && board[5] == player && board[8] == player) ||
+        (board[0] == player && board[4] == player && board[8] == player) ||
+        (board[2] == player && board[4] == player && board[6] == player))
+    {
+        return true;
+    }
+    return false;
+}
+
+int main()
+{
+    vector<char> board(9, ' ');
+    char current_player = 'X';
+
+    cout << "Igrata zapocnuva so igracot X." << endl;
+    cout << "Da se napravi poteg, vnesi broj pomegju 1 i 9." << endl;
+    cout << "Brojot odgovara na pozicijata na tablata,kako sto e prikazano podolu." << endl;
+    cout << "  1 | 2 | 3 " << endl;
+    cout << "-----------" << endl;
+    cout << "  4 | 5 | 6 " << endl;
+    cout << "-----------" << endl;
+    cout << "  7 | 8 | 9 " << endl;
+
+    for (int i = 0; i < 9; i++)
+    {
+        cout << endl << "Tekovna tabla:" << endl;
+        print_board(board);
+
+        int position;
+        do
+        {
+            cout << "Igrac " << current_player << ", vnesete go vasiot poteg: ";
+            cin >> position;
+        } while (position < 1 || position > 9 || board[position - 1] != ' ');
+
+        board[position - 1] = current_player;
+
+        if (is_winner(board, current_player))
+        {
+            cout << endl << "Igrac " << current_player << " pobedi!" << endl;
+            print_board(board);
+            return 0;
+        }
+
+        current_player = (current_player == 'X') ? 'O' : 'X';
+    }
+
+    cout << endl << "Igrata e neresena." << endl;
+    print_board(board);
+
+    return 0;
+}
+
