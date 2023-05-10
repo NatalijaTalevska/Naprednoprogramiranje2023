@@ -1,0 +1,72 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct VremenskaPrognoza {
+    string Grad;
+    int denskaTemperatura;
+    int temperaturaNavecer;
+};
+bool compare(VremenskaPrognoza vp1, VremenskaPrognoza vp2) {
+    return vp1.denskaTemperatura > vp2.denskaTemperatura;
+}
+#include <vector>
+
+int main() {
+    vector<VremenskaPrognoza> vremenskiPrognozi;
+
+    VremenskaPrognoza vp1 = {"Ohrid", 22, 11};
+    vremenskiPrognozi.push_back(vp1);
+
+    VremenskaPrognoza vp2 = {"Bitola", 23, 11};
+    vremenskiPrognozi.push_back(vp2);
+
+    VremenskaPrognoza vp3 = {"Kicevo", 22, 11};
+    vremenskiPrognozi.push_back(vp3);
+
+    VremenskaPrognoza vp4 = {"Negotino", 26, 13};
+    vremenskiPrognozi.push_back(vp4);
+
+    VremenskaPrognoza vp5 = {"Struga", 22, 11};
+    vremenskiPrognozi.push_back(vp5);
+
+    VremenskaPrognoza vp6 = {"Prilep", 23, 10};
+    vremenskiPrognozi.push_back(vp6);
+
+    VremenskaPrognoza vp7 = {"Skopje", 25, 12};
+    vremenskiPrognozi.push_back(vp7);
+
+    VremenskaPrognoza vp8 = {"Gevgelija", 25, 14};
+    vremenskiPrognozi.push_back(vp8);
+
+    VremenskaPrognoza vp9 = {"Strumica", 24, 14};
+    vremenskiPrognozi.push_back(vp9);
+
+    VremenskaPrognoza vp10 = {"Krusevo", 18, 7};
+    vremenskiPrognozi.push_back(vp10);
+
+    return 0;
+}
+-id for (vector<VremenskaPrognoza>::iterator) int = vremenskiPrognozi.begin(); int -id != vremenskiPrognozi.end();-id ++int) {
+    cout << int->Grad << " " << int->denskaTemperatura << " " << int->temperaturaNavecer << endl;
+}
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <fstream>
+
+using namespace std;
+
+struct'VremenskaPrognoza'{
+    string grad;
+    int denskaTemperatura;
+    int temperaturaNavecer;
+};
+
+
+
+
+
+
+
